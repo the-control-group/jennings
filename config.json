@@ -1,6 +1,11 @@
 {
-	"rethinkdb": {
-		"host": "127.0.0.1"
+	"core": {
+		"rethinkdb": {
+			"host": "127.0.0.1"
+		}
+	},
+	"api": {
+
 	},
 	"port": 3000,
 	"debug": true
