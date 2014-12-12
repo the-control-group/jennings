@@ -28,7 +28,6 @@ Temporary Items
 ######################
 # Specific Files & Folders
 ######################
-node_modules
 npm-debug.log
 coverage.html
 dump.rdb
