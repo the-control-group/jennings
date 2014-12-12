@@ -5,12 +5,12 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>0E66C7C0-E33C-4825-800B-0368D3DABDE0</UUID>
-        <nextObjectID>108</nextObjectID>
+        <nextObjectID>109</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
                     <key>NSPersistenceFrameworkVersion</key>
-                    <integer>481</integer>
+                    <integer>526</integer>
                     <key>NSStoreModelVersionHashes</key>
                     <dict>
                         <key>LMCookieJar</key>
@@ -61,7 +61,7 @@
         </metadata>
     </databaseInfo>
     <object type="LMREQUEST" id="z103">
-        <attribute name="body" type="string">[{"data":{"keyValues":[["src","aol",true],["context","home:view",true]]},"identifier":"com.luckymarmot.BodyFormKeyValueDynamicValue"}]</attribute>
+        <attribute name="body" type="string">[{"data":{"json":"{\\"src\\":\\"aol\\",\\"context\\":\\"home:view\\"}"},"identifier":"com.luckymarmot.JSONDynamicValue"}]</attribute>
         <attribute name="uuid" type="string">5B900C78-8CC2-4FF0-9A05-CE207438E261</attribute>
         <attribute name="url" type="string">http://127.0.0.1:3000/pixels</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
@@ -74,7 +74,7 @@
         <attribute name="name" type="string">My API</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z108"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z109 z108"></relationship>
     </object>
     <object type="LMCOOKIEJAR" id="z105">
         <attribute name="uuid" type="string">D08B9B72-04C8-468F-85B8-5FD1E993FA1F</attribute>
@@ -96,8 +96,18 @@
         <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE"></relationship>
     </object>
     <object type="LMKEYVALUE" id="z108">
-        <attribute name="value" type="string"></attribute>
+        <attribute name="value" type="string">application/json</attribute>
         <attribute name="order" type="int64">2</attribute>
+        <attribute name="name" type="string">Content-Type</attribute>
+        <attribute name="enabled" type="bool">1</attribute>
+        <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforheaders" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
+        <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z103"></relationship>
+    </object>
+    <object type="LMKEYVALUE" id="z109">
+        <attribute name="value" type="string"></attribute>
+        <attribute name="order" type="int64">3</attribute>
         <attribute name="name" type="string"></attribute>
         <attribute name="enabled" type="bool">1</attribute>
         <relationship name="groupforbodyparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
