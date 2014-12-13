@@ -28,6 +28,6 @@ Temporary Items
 ######################
 # Specific Files & Folders
 ######################
-npm-debug.log
-coverage.html
-dump.rdb
+/npm-debug.log
+/rethinkdb_data
+/coverage.html
