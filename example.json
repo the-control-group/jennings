@@ -1,0 +1,13 @@
+{
+	"id": "kasdfiugaslidufh",
+	"data": {
+		"code": "<img src=\"http://example.com/pixel.gif\" />"
+	},
+	"criteria": [
+		{
+			"op": "equal",
+			"key": "name",
+			"term": "accounts:order:complete"
+		}
+	]
+}
