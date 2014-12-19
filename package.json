@@ -1,11 +1,12 @@
 {
-  "name": "pixel-service",
-  "description": "Pixel Service Code",
+  "name": "sponsor",
+  "description": "Sponsor",
+  "author": "Mike Marcacci <mike.marcacci@thecontrolgroup.com>",
   "version": "0.0.1",
   "main": "./lib/core/index.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:the-control-group/sponsor.git"
   },
   "scripts": {
     "start": "node server.js",
