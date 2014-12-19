@@ -5,8 +5,8 @@
 	},
 	"criteria": [
 		{
-			"op": "equal",
-			"key": "name",
+			"op": "equals",
+			"key": ["name"],
 			"term": "accounts:order:complete"
 		}
 	]
