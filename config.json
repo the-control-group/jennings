@@ -11,12 +11,12 @@
 		},
 		"arrdb": {
 			"retry": 1000
-		}
+		},
+		"table": "answers"
 	},
 	"api": {
 
 	},
-	"table": "answers",
 	"port": 3000,
 	"debug": true
 }

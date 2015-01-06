@@ -6,8 +6,8 @@
 	"criteria": [
 		{
 			"op": "equals",
-			"key": ["name"],
-			"term": "accounts:order:complete"
+			"path": ["name"],
+			"value": "accounts:order:complete"
 		}
 	]
 }

@@ -6,7 +6,7 @@ var config = require('./config.json');
 // TODO: create rethinkdb if it doesn't exist
 
 var core = require('./lib/core/index.js')(config);
-var api = core.api;
+var api = require('./lib/api.js')(core);
 
 // add to the server
 app.use('/v1/', api);

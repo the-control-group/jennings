@@ -2,10 +2,10 @@
 
 var Q = require('q');
 var r = require('rethinkdb');
-var _ = require('loadash');
+var _ = require('lodash');
 
 // make a timestamped db
-var database = 'jenkens-test' + Date.now();
+var database = 'jenkens_test_' + Date.now();
 var config = require('../config.json');
 var count = 0;
 
@@ -28,8 +28,11 @@ before(function(done){
 		// create database
 		r.dbCreate(database).run(conn)
 
+		// create table
+		r.db(database).tableCreate(config.core.table).run(conn)
+
 		// load fixtures
-		.then(r.db(database).table(config.table).insert(require('./fixtures.json')).run(conn, done))
+		.then(r.db(database).table(config.core.table).insert(require('./fixtures.json')).run(conn, done))
 	});
 });
 
