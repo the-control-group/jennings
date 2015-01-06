@@ -2,12 +2,18 @@
 
 var assert = require('chai').assert;
 var config = require('../init.js');
-var arrdb = require('../../lib/core/arrdb.js')(config);
+var arrdb = require('../../lib/core/arrdb.js')(config.core);
+
+after(function(done){
+	arrdb.stop()
+	.then(function(){ done(); })
+	.catch(done);
+});
 
 describe('ArrDB', function() {
 
 	it('is not active', function(){
-		assert.isFalse(arrdb.status);
+		assert.isFalse(arrdb.active);
 	});
 
 	it('is empty', function(){
@@ -15,25 +21,74 @@ describe('ArrDB', function() {
 	});
 
 
-	it.skip('emits a "start" event');
-	it('populates db on start', function(done){
-		arrdb.start()
-		.catch(done)
-		.then(function(){
+	describe('start', function(){
+		it('emits a "start" event', function(done){
+			arrdb.once('start', done);
+			arrdb.start();
+		});
+
+		it('populates db on start', function(){
 			assert.lengthOf(arrdb.db, 1);
-			done();
-		})
+		});
 	});
+
+	describe('stop', function(){
+		it('emits a "stop" event', function(done){
+			arrdb.once('stop', done);
+			arrdb.stop();
+		});
+
+		it('clears the db when stopped', function(){
+			assert.lengthOf(arrdb.db, 0);
+		});
+	});
+
+	describe('restart', function(){
+		before(function(done){
+			arrdb.start()
+			.then(function(){ done(); })
+			.catch(done);
+		});
+
+		it('emits stop and start', function(){
+			var expect = 2; function n(){
+				expect--; if(expect === 0) done();
+			}
+
+			arrdb.once('stop', n);
+			arrdb.once('start', n);
+			arrdb.restart();
+		});
+	});
+
+	describe('auto reconnect', function(){
+		var emitsError, emitsReconnect;
+
+
+		before(function(done){
+			arrdb.start()
+			.then(function(){
+				done();
+			})
+			.catch(done);
+		});
+
+		it('emits an "error" on connection failure', function(done){
+			arrdb.once('error', function(){ done(); });
+			arrdb.conn.emit('error');
+		});
+		it('emits a "reconnect" event', function(done){
+			arrdb.once('error', function(){});
+			arrdb.once('reconnect', function(){
+				done();
+			});
+			arrdb.conn.emit('error');
+		});
+	});
+
 
 	it.skip('syncs an insert operation');
 	it.skip('syncs a replace operation');
 	it.skip('syncs a delete operation');
-
-	it.skip('emits an "error" on connection failure');
-	it.skip('emits a "reconnect" event');
-	it.skip('reconnects automatically');
-
-	it.skip('emits a "stop" event');
-	it.skip('clears the db when stopped');
 
 });
