@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "mocha test/*"
+    "test": "mocha test/tests/*"
   },
   "dependencies": {
     "body-parser": "^1.10.0",
@@ -25,5 +25,8 @@
   "engines": {
     "node": "0.10.x"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "chai": "^1.10.0"
+  }
 }

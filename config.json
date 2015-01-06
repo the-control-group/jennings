@@ -1,6 +1,7 @@
 {
 	"core": {
 		"rethinkdb": {
+			"db": "jenkens",
 			"host": "127.0.0.1"
 		},
 		"pool": {
@@ -15,7 +16,7 @@
 	"api": {
 
 	},
-	"table": "traits",
+	"table": "answers",
 	"port": 3000,
 	"debug": true
 }
