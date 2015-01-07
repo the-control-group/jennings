@@ -75,14 +75,12 @@ describe('ArrDB', function() {
 
 		it('emits an "error" on connection failure', function(done){
 			arrdb.once('error', function(){ done(); });
-			arrdb.conn.emit('error');
+			arrdb.conn.emit('error', new Error('testing'));
 		});
 		it('emits a "reconnect" event', function(done){
 			arrdb.once('error', function(){});
-			arrdb.once('reconnect', function(){
-				done();
-			});
-			arrdb.conn.emit('error');
+			arrdb.once('reconnect', function(){ done(); });
+			arrdb.conn.emit('error', new Error('testing'));
 		});
 	});
 
