@@ -1,0 +1,45 @@
+{
+	"id": "https://raw.githubusercontent.com/the-control-group/jennings/master/schema/answer.json",
+	"$schema": "http://json-schema.org/draft-04/schema",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "string"
+		},
+		"data": {
+			"type": "object",
+			"default": {},
+			"additionalProperties": true
+		},
+		"criteria": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"allOf": {
+					"type": "object",
+					"required": [
+						"op",
+						"path",
+						"value"
+					],
+					"additionalProperties": false,
+					"properties": {
+						"op": {
+							"type": "string"
+						},
+						"path": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"value": {
+							"type": "any"
+						}
+					}
+				}
+			}
+		}
+	}
+}

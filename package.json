@@ -15,8 +15,8 @@
   "dependencies": {
     "body-parser": "^1.10.1",
     "express": "^4.10.7",
+    "jjv": "^1.0.2",
     "q": "^1.1.2",
-    "redis": "^0.10.3",
     "rethinkdb": "^1.15.0-0"
   },
   "dev-dependencies": {

@@ -28,7 +28,7 @@ describe('ArrDB', function() {
 		});
 
 		it('populates db on start', function(){
-			assert.lengthOf(arrdb.db, 1);
+			assert.lengthOf(arrdb.db, 2);
 		});
 	});
 

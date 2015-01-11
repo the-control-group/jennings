@@ -42,7 +42,7 @@ describe('Filter', function() {
 			));
 		});
 
-		it('rejects deep equals', function(){
+		it('accepts deep equals', function(){
 			assert.isTrue(filter(
 				[{op: 'equals', path: ['foo','bar'], value: true}],
 				{foo: {bar: true}}
@@ -73,6 +73,50 @@ describe('Filter', function() {
 		it('rejects nonexistant deep path', function(){
 			assert.isFalse(filter(
 				[{op: 'equals', path: ['foo','bar'], value: 'baz'}],
+				{foo: 'bar'}
+			));
+		});
+	});
+
+	describe('match', function(){
+		it('accepts match', function(){
+			assert.isTrue(filter(
+				[{op: 'matches', path: ['foo'], value: 'bar'}],
+				{foo: 'bar'}
+			));
+		});
+
+		it('accepts deep match', function(){
+			assert.isTrue(filter(
+				[{op: 'matches', path: ['foo','bar'], value: '^.az$'}],
+				{foo: {bar: 'baz'}}
+			));
+		});
+
+		it('rejects non-string path value', function(){
+			assert.isFalse(filter(
+				[{op: 'matches', path: ['foo'], value: true}],
+				{foo: true}
+			));
+		});
+
+		it('rejects failed match', function(){
+			assert.isFalse(filter(
+				[{op: 'matches', path: ['foo'], value: 'fff'}],
+				{foo: 'asdf'}
+			));
+		});
+
+		it('rejects nonexistant path', function(){
+			assert.isFalse(filter(
+				[{op: 'matches', path: ['foo'], value: true}],
+				{}
+			));
+		});
+
+		it('rejects nonexistant deep path', function(){
+			assert.isFalse(filter(
+				[{op: 'matches', path: ['foo','bar'], value: 'baz'}],
 				{foo: 'bar'}
 			));
 		});

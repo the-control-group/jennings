@@ -1,3 +1,29 @@
 [{
-	"id": "a"
+	"id": "one",
+	"data": {
+		"foo": "bar"
+	},
+	"criteria": [
+		{
+			"op": "equals",
+			"path": ["name"],
+			"value": "sink it and you've scratched"
+		},
+		{
+			"op": "matches",
+			"path": ["name"],
+			"value": "scratched"
+		}
+	]
+},
+{
+	"id": "two",
+	"data": {},
+	"criteria": [
+		{
+			"op": "equals",
+			"path": ["name"],
+			"value": "accounts:order:complete"
+		}
+	]
 }]
