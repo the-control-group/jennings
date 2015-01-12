@@ -17,7 +17,7 @@
     "express": "^4.10.7",
     "jjv": "^1.0.2",
     "q": "^1.1.2",
-    "rethinkdb": "^1.15.0-0"
+    "rethinkdb": "^1.15.0"
   },
   "dev-dependencies": {
     "mocha": "~2.0.1"

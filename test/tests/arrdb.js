@@ -1,5 +1,6 @@
 'use strict';
 
+var r = require('rethinkdb');
 var assert = require('chai').assert;
 var config = require('../init.js');
 var arrdb = require('../../lib/core/arrdb.js')(config.core);
@@ -77,6 +78,7 @@ describe('ArrDB', function() {
 			arrdb.once('error', function(){ done(); });
 			arrdb.conn.emit('error', new Error('testing'));
 		});
+
 		it('emits a "reconnect" event', function(done){
 			arrdb.once('error', function(){});
 			arrdb.once('reconnect', function(){ done(); });
@@ -84,9 +86,77 @@ describe('ArrDB', function() {
 		});
 	});
 
+	describe('sync operations', function(){
+		it('syncs an insert operation', function(done){
+			var answer = {
+				id: 'arrdb-test',
+				data: {},
+				criteria: [
+					{
+						op: 'equals',
+						path: ['foo'],
+						value: 'bar'
+					}
+				]
+			};
 
-	it.skip('syncs an insert operation');
-	it.skip('syncs a replace operation');
-	it.skip('syncs a delete operation');
+			arrdb.once('sync', function(){
+				assert.lengthOf(arrdb.db, 3);
+				assert.include(arrdb.db, answer);
+				done();
+			});
+
+			r.connect(config.core.rethinkdb, function(err, conn) {
+				if(err) return done(err);
+				r.db(config.core.rethinkdb.db).table(config.core.table).insert(answer).run(conn, function(err, res){
+					conn.close();
+					if(err) done(err);
+				})
+			});
+		});
+
+		it('syncs a replace operation', function(done){
+			var answer = {
+				id: 'arrdb-test',
+				data: {},
+				criteria: [
+					{
+						op: 'equals',
+						path: ['foo'],
+						value: 'baz'
+					}
+				]
+			};
+
+			arrdb.once('sync', function(){
+				assert.lengthOf(arrdb.db, 3);
+				assert.include(arrdb.db, answer);
+				done();
+			});
+
+			r.connect(config.core.rethinkdb, function(err, conn) {
+				if(err) return done(err);
+				r.db(config.core.rethinkdb.db).table(config.core.table).get('arrdb-test').replace(answer).run(conn, function(err, res){
+					conn.close();
+					if(err) done(err);
+				})
+			});
+		});
+
+		it('syncs a delete operation', function(done){
+			arrdb.once('sync', function(){
+				assert.lengthOf(arrdb.db, 2);
+				done();
+			});
+
+			r.connect(config.core.rethinkdb, function(err, conn) {
+				if(err) return done(err);
+				r.db(config.core.rethinkdb.db).table(config.core.table).get('arrdb-test').delete().run(conn, function(err, res){
+					conn.close();
+					if(err) done(err);
+				})
+			});
+		});
+	});
 
 });

@@ -55,7 +55,9 @@ after(function(done){
 	r.connect(_.omit(config.core.rethinkdb, 'db'), function(err, conn) {
 		if(err) return done(err);
 
-		r.dbDrop(database).run(conn, done);
+		r.dbDrop(database).run(conn, function(err){
+			conn.close(done);
+		});
 	});
 });
 
