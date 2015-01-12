@@ -9,10 +9,10 @@ var core = require('./lib/core/index.js')(config);
 var api = require('./lib/api.js')(core);
 
 // add to the server
-app.use('/v1/', api);
+app.use(api);
 
 // error handling
-router.use(function(err, req, res, next){
+app.use(function(err, req, res, next){
 	console.error(err);
 });
 

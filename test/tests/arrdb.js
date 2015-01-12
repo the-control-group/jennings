@@ -65,7 +65,6 @@ describe('ArrDB', function() {
 	describe('auto reconnect', function(){
 		var emitsError, emitsReconnect;
 
-
 		before(function(done){
 			arrdb.start()
 			.then(function(){
@@ -80,13 +79,20 @@ describe('ArrDB', function() {
 		});
 
 		it('emits a "reconnect" event', function(done){
-			arrdb.once('error', function(){});
+			var cb = function(){};
+			arrdb.on('error', cb);
 			arrdb.once('reconnect', function(){ done(); });
 			arrdb.conn.emit('error', new Error('testing'));
 		});
 	});
 
 	describe('sync operations', function(){
+		before(function(done){
+			arrdb.start()
+			.then(function(){ done(); })
+			.catch(done);
+		});
+
 		it('syncs an insert operation', function(done){
 			var answer = {
 				id: 'arrdb-test',
