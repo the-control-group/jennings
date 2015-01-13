@@ -1,7 +1,7 @@
 'use strict';
 
 var app = require('express')();
-var config = require('./config.json');
+var config = require(process.env.CONFIG || './config.json');
 
 // TODO: create rethinkdb if it doesn't exist
 
