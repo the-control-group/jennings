@@ -2,9 +2,13 @@
 
 var assert = require('chai').assert;
 var config = require('../init.js');
-var core = require('../../lib/core/index.js')(config.core);
+var core;
 
 describe('Core', function() {
+
+	before(function(){
+		core = require('../../lib/core/index.js')(config.core);
+	});
 
 	it('rejects an invalid insert', function(done){
 		core.insert({foo: 'bar'})
@@ -76,9 +80,34 @@ describe('Core', function() {
 		.catch(done);
 	});
 
-	it.skip('responds to a query with conditions');
-	it.skip('responds to a query with a clue');
-	it.skip('responds to a query with a clue and conditions');
+	it('responds to a query with conditions', function(done){
+		var conditions = [{
+			path: ['id'],
+			op: 'equals',
+			value: 'one'
+		}];
+		core.query(null, conditions).then(function(answers){
+			assert.lengthOf(answers, 1);
+			assert.equal(answers[0].id, 'one');
+			done();
+		});
+	});
+
+	it('responds to a query with a clue', function(done){
+		var clue = {
+			category: 'let\'s have a ball',
+			question: 'sink it and you\'ve scratched'
+		};
+		// {
+		// 	category: 'street\'s',
+		// 	question: 'america\'s second-largest daily newspaper, i\'s published in new york city & 4 regional editions'
+		// }
+		core.query(clue).then(function(answers){
+			assert.lengthOf(answers, 1);
+			assert.equal(answers[0].id, 'one');
+			done();
+		});
+	});
 
 	it('returns null for a nonexistant delete', function(done){
 		core.delete('foo')

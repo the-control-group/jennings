@@ -7,6 +7,7 @@ var _ = require('lodash');
 // make a timestamped db
 var database = 'jenkens_test_' + Date.now();
 var config = require('../config.json');
+var promise = null;
 var count = 0;
 
 // export the updated configs
@@ -19,21 +20,22 @@ before(function(done){
 	count++; // increment the number of queued tests
 
 	// don't setup twice
-	if(count > 1) return done();
+	if(count > 1) return promise.then(function(){ done(); });
 
 	// connect to rethinkdb
-	r.connect(_.omit(config.core.rethinkdb, 'db'), function(err, conn) {
-		if(err) return done(err);
+	promise = r.connect(_.omit(config.core.rethinkdb, 'db')).then(function(conn) {
 
 		// create database
-		r.dbCreate(database).run(conn)
+		return r.dbCreate(database).run(conn)
 
 		// create table
-		r.db(database).tableCreate(config.core.table).run(conn)
+		.then(function(){ return r.db(database).tableCreate(config.core.table).run(conn); })
 
 		// load fixtures
-		.then(r.db(database).table(config.core.table).insert(require('./fixtures.json')).run(conn, done))
+		.then(function(){ return r.db(database).table(config.core.table).insert(require('./fixtures.json')).run(conn); })
 	});
+
+	return promise.then(function(){ return done(); });
 });
 
 
