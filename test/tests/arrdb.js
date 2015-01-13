@@ -5,13 +5,14 @@ var assert = require('chai').assert;
 var config = require('../init.js');
 var arrdb = require('../../lib/core/arrdb.js')(config.core);
 
-after(function(done){
-	arrdb.stop()
-	.then(function(){ done(); })
-	.catch(done);
-});
+
 
 describe('ArrDB', function() {
+	after(function(done){
+		arrdb.stop()
+		.then(function(){ done(); })
+		.catch(done);
+	});
 
 	it('is not active', function(){
 		assert.isFalse(arrdb.active);
@@ -20,7 +21,6 @@ describe('ArrDB', function() {
 	it('is empty', function(){
 		assert.lengthOf(arrdb.db, 0);
 	});
-
 
 	describe('start', function(){
 		it('emits a "start" event', function(done){
@@ -51,7 +51,7 @@ describe('ArrDB', function() {
 			.catch(done);
 		});
 
-		it('emits stop and start', function(){
+		it('emits stop and start', function(done){
 			var expect = 2; function n(){
 				expect--; if(expect === 0) done();
 			}
@@ -63,8 +63,6 @@ describe('ArrDB', function() {
 	});
 
 	describe('auto reconnect', function(){
-		var emitsError, emitsReconnect;
-
 		before(function(done){
 			arrdb.start()
 			.then(function(){
@@ -79,8 +77,7 @@ describe('ArrDB', function() {
 		});
 
 		it('emits a "reconnect" event', function(done){
-			var cb = function(){};
-			arrdb.on('error', cb);
+			arrdb.once('error', function(){});
 			arrdb.once('reconnect', function(){ done(); });
 			arrdb.conn.emit('error', new Error('testing'));
 		});
@@ -117,7 +114,7 @@ describe('ArrDB', function() {
 				r.db(config.core.rethinkdb.db).table(config.core.table).insert(answer).run(conn, function(err, res){
 					conn.close();
 					if(err) done(err);
-				})
+				});
 			});
 		});
 
@@ -145,7 +142,7 @@ describe('ArrDB', function() {
 				r.db(config.core.rethinkdb.db).table(config.core.table).get('arrdb-test').replace(answer).run(conn, function(err, res){
 					conn.close();
 					if(err) done(err);
-				})
+				});
 			});
 		});
 
@@ -160,7 +157,7 @@ describe('ArrDB', function() {
 				r.db(config.core.rethinkdb.db).table(config.core.table).get('arrdb-test').delete().run(conn, function(err, res){
 					conn.close();
 					if(err) done(err);
-				})
+				});
 			});
 		});
 	});

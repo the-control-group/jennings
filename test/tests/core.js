@@ -10,6 +10,12 @@ describe('Core', function() {
 		core = require('../../lib/core/index.js')(config.core);
 	});
 
+	after(function(done){
+		core.arrdb.stop()
+		.then(function(){ done(); })
+		.catch(done);
+	});
+
 	it('rejects an invalid insert', function(done){
 		core.insert({foo: 'bar'})
 		.then(function(){ done(new Error('should not pass validation')); })
