@@ -106,7 +106,7 @@ describe('Core', function() {
 		};
 		// {
 		// 	category: 'street\'s',
-		// 	question: 'america\'s second-largest daily newspaper, i\'s published in new york city & 4 regional editions'
+		// 	question: 'america\'s second-largest daily newspaper, it\'s published in new york city & 4 regional editions'
 		// }
 		core.query(clue).then(function(answers){
 			assert.lengthOf(answers, 1);

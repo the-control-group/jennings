@@ -24,13 +24,23 @@
 {
 	"id": "two",
 	"data": {
-		"card": "B"
+		"card": "wall street journal"
 	},
 	"criteria": [
 		{
 			"op": "equal",
-			"path": ["name"],
-			"value": "accounts:order:complete"
+			"path": ["category"],
+			"value": "let's have a ball"
+		},
+		{
+			"op": "match",
+			"path": ["newspaper"],
+			"value": "scratched"
+		},
+		{
+			"op": "match",
+			"path": ["4 regional editions$"],
+			"value": "sink"
 		}
 	]
 }]

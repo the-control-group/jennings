@@ -5,7 +5,7 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>C742532E-EA24-458A-AD10-EB19842EEB2D</UUID>
-        <nextObjectID>120</nextObjectID>
+        <nextObjectID>122</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -65,11 +65,11 @@
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">Default Environment</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z108"></relationship>
-        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE"></relationship>
+        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z122"></relationship>
     </object>
     <object type="LMREQUEST" id="z103">
         <attribute name="uuid" type="string">5372AC21-B7C9-4A99-9952-CF7BAF1B5AA4</attribute>
-        <attribute name="url" type="string">http://localhost:3000/v1/one</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"75CF20AA-DC1E-4960-B360-07549D43E7B2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1\\/one"]</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
@@ -94,7 +94,7 @@
     </object>
     <object type="LMREQUEST" id="z105">
         <attribute name="uuid" type="string">5B8C1AAD-20B7-41B0-8EDD-2F9BF9E3A503</attribute>
-        <attribute name="url" type="string">http://localhost:3000/v1</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"75CF20AA-DC1E-4960-B360-07549D43E7B2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1"]</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
@@ -109,26 +109,26 @@
     </object>
     <object type="LMREQUEST" id="z106">
         <attribute name="uuid" type="string">156F7FB8-9FC8-48DB-A86D-A7EE9ECFDE9A</attribute>
-        <attribute name="url" type="string">http://localhost:3000/v1</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"75CF20AA-DC1E-4960-B360-07549D43E7B2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1"]</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"id\\": \\"one\\",\\n\\t\\"data\\": {\\n\\t\\t\\"foo\\": \\"bar\\"\\n\\t},\\n\\t\\"criteria\\": [\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"equals\\",\\n\\t\\t\\t\\"path\\": [\\"name\\"],\\n\\t\\t\\t\\"value\\": \\"sink it and you've scratched\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"matches\\",\\n\\t\\t\\t\\"path\\": [\\"name\\"],\\n\\t\\t\\t\\"value\\": \\"scratched\\"\\n\\t\\t}\\n\\t]\\n}"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"criteria\\": [\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"equal\\",\\n\\t\\t\\t\\"path\\": [\\n\\t\\t\\t\\t\\"category\\"\\n\\t\\t\\t],\\n\\t\\t\\t\\"value\\": \\"let's have a ball\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"match\\",\\n\\t\\t\\t\\"path\\": [\\n\\t\\t\\t\\t\\"question\\"\\n\\t\\t\\t],\\n\\t\\t\\t\\"value\\": \\"scratched\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"match\\",\\n\\t\\t\\t\\"path\\": [\\n\\t\\t\\t\\t\\"question\\"\\n\\t\\t\\t],\\n\\t\\t\\t\\"value\\": \\"sink\\"\\n\\t\\t}\\n\\t],\\n\\t\\"data\\": {\\n\\t\\t\\"response\\": \\"cue ball\\"\\n\\t}\\n}"]</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">Insert</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z113 z104"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z104 z113"></relationship>
     </object>
     <object type="LMENVIRONMENTDOMAIN" id="z108">
         <attribute name="uuid" type="string">686EF4C0-0C2B-4A6B-A2C1-6CECD982E816</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">Default Domain</attribute>
         <relationship name="environments" type="0/0" destination="LMENVIRONMENT" idrefs="z102"></relationship>
-        <relationship name="variables" type="0/0" destination="LMENVIRONMENTVARIABLE"></relationship>
+        <relationship name="variables" type="0/0" destination="LMENVIRONMENTVARIABLE" idrefs="z121"></relationship>
     </object>
     <object type="LMKEYVALUE" id="z109">
         <attribute name="value" type="string"></attribute>
@@ -167,19 +167,19 @@
     </object>
     <object type="LMREQUEST" id="z114">
         <attribute name="uuid" type="string">8C3B2281-E846-49E1-9035-88C72310BE0B</attribute>
-        <attribute name="url" type="string">http://localhost:3000/v1/one</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"75CF20AA-DC1E-4960-B360-07549D43E7B2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1\\/one"]</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">PUT</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"id\\": \\"one\\",\\n\\t\\"data\\": {\\n\\t\\t\\"foo\\": \\"baz\\"\\n\\t},\\n\\t\\"criteria\\": [\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"equals\\",\\n\\t\\t\\t\\"path\\": [\\"name\\"],\\n\\t\\t\\t\\"value\\": \\"sink it and you've scratched\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"matches\\",\\n\\t\\t\\t\\"path\\": [\\"name\\"],\\n\\t\\t\\t\\"value\\": \\"scratched\\"\\n\\t\\t}\\n\\t]\\n}"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"criteria\\": [\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"equal\\",\\n\\t\\t\\t\\"path\\": [\\n\\t\\t\\t\\t\\"category\\"\\n\\t\\t\\t],\\n\\t\\t\\t\\"value\\": \\"let's have a ball\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"match\\",\\n\\t\\t\\t\\"path\\": [\\n\\t\\t\\t\\t\\"question\\"\\n\\t\\t\\t],\\n\\t\\t\\t\\"value\\": \\"scratched\\"\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\t\\"op\\": \\"match\\",\\n\\t\\t\\t\\"path\\": [\\n\\t\\t\\t\\t\\"question\\"\\n\\t\\t\\t],\\n\\t\\t\\t\\"value\\": \\"sink\\"\\n\\t\\t}\\n\\t],\\n\\t\\"data\\": {\\n\\t\\t\\"response\\": \\"cue ball\\"\\n\\t},\\n\\t\\"id\\": \\"one\\"\\n}"]</attribute>
         <attribute name="order" type="int64">1</attribute>
         <attribute name="name" type="string">Replace</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z115 z116"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z116 z115"></relationship>
     </object>
     <object type="LMKEYVALUE" id="z115">
         <attribute name="value" type="string">application/json</attribute>
@@ -203,7 +203,7 @@
     </object>
     <object type="LMREQUEST" id="z117">
         <attribute name="uuid" type="string">EE624372-4AF4-4E06-A3AD-8D84583993C3</attribute>
-        <attribute name="url" type="string">["http:\\/\\/localhost:3000\\/v1?clue={\\"name\\":\\"accounts:order:complete\\"}"]</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"75CF20AA-DC1E-4960-B360-07549D43E7B2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1?clue={\\"category\\": \\"let's have a ball\\", \\"question\\": \\"sink it and you\\\\\\"ve scratched\\"}"]</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
@@ -238,7 +238,7 @@
     </object>
     <object type="LMREQUEST" id="z120">
         <attribute name="uuid" type="string">3492456E-0F38-47E1-B393-6828A7EDE96C</attribute>
-        <attribute name="url" type="string">["http:\\/\\/localhost:3000\\/v1?criteria=[{\\"path\\": [\\"id\\"], \\"op\\": \\"equals\\", \\"value\\": \\"one\\"}]"]</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"75CF20AA-DC1E-4960-B360-07549D43E7B2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/v1?criteria=[{\\"path\\": [\\"id\\"], \\"op\\": \\"equal\\", \\"value\\": \\"one\\"}]"]</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
@@ -250,5 +250,17 @@
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z119"></relationship>
+    </object>
+    <object type="LMENVIRONMENTVARIABLE" id="z121">
+        <attribute name="uuid" type="string">75CF20AA-DC1E-4960-B360-07549D43E7B2</attribute>
+        <attribute name="order" type="int64">0</attribute>
+        <attribute name="name" type="string">host</attribute>
+        <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z108"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z122"></relationship>
+    </object>
+    <object type="LMENVIRONMENTVARIABLEVALUE" id="z122">
+        <attribute name="value" type="string">localhost:3000</attribute>
+        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z102"></relationship>
+        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z121"></relationship>
     </object>
 </database>
