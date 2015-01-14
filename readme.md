@@ -21,6 +21,7 @@ How To Use
 ----------
 
 **as a library**
+
 ```js
 var jennings = require('js');
 
@@ -45,6 +46,7 @@ jennings.query(null, [{op: 'equal', path: ['id'], value: 'one'}]);
 ```
 
 **as a router**
+
 ```js
 var config = require('path/to/your/config.json');
 var app = require('express')();
@@ -57,6 +59,7 @@ app.use('/prefix', jennings.router);
 ```
 
 **as a service**
+
 ```bash
 # run the server
 node server.js
