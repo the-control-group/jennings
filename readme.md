@@ -57,13 +57,13 @@ app.use('/prefix', jennings.router);
 ```
 
 **as a service**
-``bash
+```bash
 # run the server
 node server.js
 
 # in production, it's recommended to cluster using PM2
 pm2 start server.js -i max -n jennings
-``
+```
 
 
 Performance Tips
