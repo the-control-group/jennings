@@ -5,11 +5,10 @@ var config = require(process.env.CONFIG || './config.json');
 
 // TODO: create rethinkdb if it doesn't exist
 
-var core = require('./lib/core/index.js')(config.core);
-var api = require('./lib/api.js')(core);
+var jennings = require('./lib/core/index.js')(config.core);
 
 // add to the server
-app.use(config.prefix, api);
+app.use(config.prefix, jennings.router);
 
 // error handling
 app.use(function(err, req, res, next){
