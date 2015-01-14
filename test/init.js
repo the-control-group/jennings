@@ -5,7 +5,7 @@ var r = require('rethinkdb');
 var _ = require('lodash');
 
 // make a timestamped db
-var database = 'jenkens_test_' + Date.now();
+var database = 'jennings_test_' + Date.now();
 var config = require('../config.json');
 var promise = null;
 var count = 0;

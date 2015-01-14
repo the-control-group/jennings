@@ -5,17 +5,17 @@
 	},
 	"criteria": [
 		{
-			"op": "equals",
+			"op": "equal",
 			"path": ["category"],
 			"value": "let's have a ball"
 		},
 		{
-			"op": "matches",
+			"op": "match",
 			"path": ["question"],
 			"value": "scratched"
 		},
 		{
-			"op": "matches",
+			"op": "match",
 			"path": ["question"],
 			"value": "sink"
 		}
@@ -28,7 +28,7 @@
 	},
 	"criteria": [
 		{
-			"op": "equals",
+			"op": "equal",
 			"path": ["name"],
 			"value": "accounts:order:complete"
 		}

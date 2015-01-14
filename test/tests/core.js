@@ -28,7 +28,7 @@ describe('Core', function() {
 			data: {},
 			criteria: [
 				{
-					op: 'equals',
+					op: 'equal',
 					path: ['foo'],
 					value: 'bar'
 				}
@@ -54,7 +54,7 @@ describe('Core', function() {
 			data: {},
 			criteria: [
 				{
-					op: 'equals',
+					op: 'equal',
 					path: ['foo'],
 					value: 'baz'
 				}
@@ -89,7 +89,7 @@ describe('Core', function() {
 	it('responds to a query with conditions', function(done){
 		var conditions = [{
 			path: ['id'],
-			op: 'equals',
+			op: 'equal',
 			value: 'one'
 		}];
 		core.query(null, conditions).then(function(answers){
