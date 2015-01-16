@@ -1,19 +1,34 @@
 'use strict';
 
-var app = require('express')();
-var config = require(process.env.CONFIG || './config.json');
+var cluster = require('cluster');
 
-// TODO: create rethinkdb if it doesn't exist
+// the master
+if (cluster.isMaster) {
+	for (var i = 0; i < require('os').cpus().length; i++) {
+		cluster.fork();
+	}
 
-var jennings = require('./lib/core/index.js')(config.core);
+	// replace a dead child
+	cluster.on('exit', function(child, code, signal) {
+		console.error('Child process ' + child.process.pid + ' died with code ' + code +'. Restarting...');
+		cluster.fork();
+	});
+}
 
-// add to the server
-app.use(config.prefix, jennings.router);
+// the child processes
+else {
+	var app = require('express')();
+	var config = require(process.env.CONFIG || './config.json');
+	var jennings = require('./lib/core/index.js')(config.core);
 
-// error handling
-app.use(function(err, req, res, next){
-	console.error(err);
-});
+	// add to the server
+	app.use(config.prefix, jennings.router);
 
-// start listening
-app.listen(config.port);
+	// handle transactional errors
+	app.use(function(err, req, res, next){
+		console.error(err);
+	});
+
+	// start listening
+	app.listen(config.port);
+}
