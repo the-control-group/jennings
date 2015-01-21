@@ -102,7 +102,7 @@ describe('Router', function() {
 	it('responds 404 to a nonexistant GET', function(done){
 		request
 			.get('/nonexistant')
-			.send(data)
+			.send()
 			.expect(404)
 			.end(done);
 	});
@@ -110,7 +110,7 @@ describe('Router', function() {
 	it('responds 200 to an existant GET', function(done){
 		request
 			.get('/' + createdId)
-			.send(data)
+			.send()
 			.expect(200)
 			.end(function(err, res){
 				if(err) return done(err);
@@ -125,7 +125,7 @@ describe('Router', function() {
 		request
 			.get('/')
 			.query({criteria: '[{"op":"eq","path":["id"],"value":"'+createdId+'"}]'})
-			.send(data)
+			.send()
 			.expect(200)
 			.end(function(err, res){
 				if(err) return done(err);
@@ -139,7 +139,7 @@ describe('Router', function() {
 		request
 			.get('/')
 			.query({clue: '{"category": "let\'s have a ball", "question": "sink it and you\\\"ve scratched"}'})
-			.send(data)
+			.send()
 			.expect(200)
 			.end(function(err, res){
 				if(err) return done(err);
@@ -152,7 +152,7 @@ describe('Router', function() {
 	it('responds 404 to a nonexistant DELETE', function(done){
 		request
 			.delete('/nonexistant')
-			.send(data)
+			.send()
 			.expect(404)
 			.end(done);
 	});
@@ -160,7 +160,7 @@ describe('Router', function() {
 	it('responds 200 to an existant DELETE', function(done){
 		request
 			.delete('/' + createdId)
-			.send(data)
+			.send()
 			.expect(200)
 			.end(function(err, res){
 				if(err) return done(err);
