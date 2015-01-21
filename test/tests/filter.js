@@ -78,6 +78,99 @@ describe('Filter', function() {
 		});
 	});
 
+	describe('lt', function(){
+		it('returns false when greater', function(){
+			assert.isFalse(filter(
+				[{op: 'lt', path: ['foo'], value: 4}],
+				{foo: 5}
+			));
+		});
+
+		it('returns false when equal', function(){
+			assert.isFalse(filter(
+				[{op: 'lt', path: ['foo'], value: 5}],
+				{foo: 5}
+			));
+		});
+
+		it('returns true when less', function(){
+			assert.isTrue(filter(
+				[{op: 'lt', path: ['foo'], value: 6}],
+				{foo: 5}
+			));
+		});
+	});
+
+	describe('lte', function(){
+		it('returns false when greater', function(){
+			assert.isFalse(filter(
+				[{op: 'lte', path: ['foo'], value: 4}],
+				{foo: 5}
+			));
+		});
+
+		it('returns true when equal', function(){
+			assert.isTrue(filter(
+				[{op: 'lte', path: ['foo'], value: 5}],
+				{foo: 5}
+			));
+		});
+
+		it('returns true when less', function(){
+			assert.isTrue(filter(
+				[{op: 'lte', path: ['foo'], value: 6}],
+				{foo: 5}
+			));
+		});
+	});
+
+
+	describe('gt', function(){
+		it('returns true when greater', function(){
+			assert.isTrue(filter(
+				[{op: 'gt', path: ['foo'], value: 4}],
+				{foo: 5}
+			));
+		});
+
+		it('returns false when equal', function(){
+			assert.isFalse(filter(
+				[{op: 'gt', path: ['foo'], value: 5}],
+				{foo: 5}
+			));
+		});
+
+		it('returns false when less', function(){
+			assert.isFalse(filter(
+				[{op: 'gt', path: ['foo'], value: 6}],
+				{foo: 5}
+			));
+		});
+	});
+
+	describe('gte', function(){
+		it('returns true when greater', function(){
+			assert.isTrue(filter(
+				[{op: 'gte', path: ['foo'], value: 4}],
+				{foo: 5}
+			));
+		});
+
+		it('returns true when equal', function(){
+			assert.isTrue(filter(
+				[{op: 'gte', path: ['foo'], value: 5}],
+				{foo: 5}
+			));
+		});
+
+		it('returns false when less', function(){
+			assert.isFalse(filter(
+				[{op: 'gte', path: ['foo'], value: 6}],
+				{foo: 5}
+			));
+		});
+	});
+
 	describe('match', function(){
 		it('accepts match', function(){
 			assert.isTrue(filter(

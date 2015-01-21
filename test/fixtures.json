@@ -38,9 +38,9 @@
 			"value": "scratched"
 		},
 		{
-			"op": "match",
-			"path": ["4 regional editions$"],
-			"value": "sink"
+			"op": "eq",
+			"path": ["editions"],
+			"value": 3
 		}
 	]
 }]

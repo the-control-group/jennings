@@ -5,26 +5,26 @@ var config = require('../init.js');
 var core;
 
 describe('Core', function() {
+	var insertedId;
 
 	before(function(){
 		core = require('../../lib/core/index.js')(config.core);
 	});
 
 	after(function(done){
-		core.arrdb.stop()
+		core.$arrdb.stop()
 		.then(function(){ done(); })
 		.catch(done);
 	});
 
-	it('rejects an invalid insert', function(done){
-		core.insert({foo: 'bar'})
+	it('rejects an invalid create', function(done){
+		core.create({foo: 'bar'})
 		.then(function(){ done(new Error('should not pass validation')); })
 		.catch(function(){ done(); });
 	});
 
-	it('accepts a valid insert', function(done){
+	it('accepts a valid create', function(done){
 		var data = {
-			id: 'core-test',
 			data: {},
 			criteria: [
 				{
@@ -34,23 +34,25 @@ describe('Core', function() {
 				}
 			]
 		};
-		core.insert(data)
+		core.create(data)
 		.then(function(answer){
+			insertedId = answer.id;
+			delete answer.id;
 			assert.deepEqual(answer, data);
 			done();
 		})
 		.catch(done);
 	});
 
-	it('rejects an invalid replace', function(done){
-		core.replace('core-test', {foo: 'bar'})
+	it('rejects an invalid save', function(done){
+		core.save(insertedId, {foo: 'bar'})
 		.then(function(){ done(new Error('should not pass validation')); })
 		.catch(function(){ done(); });
 	});
 
-	it('accepts a valid replace', function(done){
+	it('accepts a valid save', function(done){
 		var data = {
-			id: 'core-test',
+			id: insertedId,
 			data: {},
 			criteria: [
 				{
@@ -60,7 +62,7 @@ describe('Core', function() {
 				}
 			]
 		};
-		core.replace(data.id, data)
+		core.save(data.id, data)
 		.then(function(answer){
 			assert.deepEqual(answer, data);
 			done();
@@ -78,9 +80,9 @@ describe('Core', function() {
 	});
 
 	it('accepts an existing get', function(done){
-		core.get('core-test')
+		core.get(insertedId)
 		.then(function(answer){
-			assert.equal(answer.id, 'core-test');
+			assert.equal(answer.id, insertedId);
 			done();
 		})
 		.catch(done);
@@ -106,7 +108,8 @@ describe('Core', function() {
 		};
 		// {
 		// 	category: 'street\'s',
-		// 	question: 'america\'s second-largest daily newspaper, it\'s published in new york city & 4 regional editions'
+		// 	question: 'america\'s second-largest daily newspaper, it\'s published in new york city & 4 regional editions',
+		// 	editions: 4
 		// }
 		core.query(clue).then(function(answers){
 			assert.lengthOf(answers, 1);
@@ -124,9 +127,9 @@ describe('Core', function() {
 		.catch(done);
 	});
 	it('accepts an existing delete', function(done){
-		core.delete('core-test')
+		core.delete(insertedId)
 		.then(function(answer){
-			assert.equal(answer.id, 'core-test');
+			assert.equal(answer.id, insertedId);
 			done();
 		})
 		.catch(done);

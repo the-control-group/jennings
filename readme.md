@@ -22,25 +22,30 @@ How To Use
 
 **as a library**
 
+All library methods return a promise object that resolves to the noted types.
+
 ```js
 var jennings = require('js');
 
-// insert a new answer (returns a promise)
-jennings.insert({conditions: [{op: 'equal', path: ['foo'], 'value': 'bar'}], data: {cool: 'beans'}});
+// insert a new answer and auto-generate ID (resolves to the new answer)
+jennings.create({conditions: [{op: 'equal', path: ['foo'], 'value': 'bar'}], data: {cool: 'beans'}});
 
-// replace an existing answer (returns a promise)
+// replace/insert an answer by ID (resolves to the new answer)
 jennings.replace('one', {id: 'one', conditions: [{op: 'equal', path: ['foo'], 'value': 'bar'}], data: {cool: 'beans'}});
 
-// get an answer by ID
+// get an answer by ID (resolves to the requested answer or null)
 jennings.get('one');
 
-// get all answers
+// delete an answer by ID (resolves to the deleted answer)
+jennings.delete('one');
+
+// get all answers (resolves to an array of answers)
 jennings.query();
 
-// query for answers by clue
+// query for answers by clue (resolves to an array of answers)
 jennings.query({foo: 'bar'});
 
-// query for by conditions
+// query for by conditions (resolves to an array of answers)
 jennings.query(null, [{op: 'equal', path: ['id'], value: 'one'}]);
 
 ```
