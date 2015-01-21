@@ -25,8 +25,8 @@ else {
 	app.use(config.prefix, jennings.router);
 
 	// handle transactional errors
-	app.use(function(err, req, res, next){
-		console.error(err);
+	app.use(function(err, req, res, next) {
+		res.status(400).send({message: err.message});
 	});
 
 	// start listening
