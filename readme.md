@@ -10,7 +10,7 @@ Jennings is designed for extremely low latency and easy clustering; the entire a
 
 Query Language
 --------------
-Conditions are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/html/rfc6902)). A condition is an object that consists of an `op` property which specifies which operation to use; a `path` property which can be either a [json-pointer](https://tools.ietf.org/html/rfc6901) or (preferred) an array of path parts; and a `value` property which is used by the operation. The following operations are currently supported:
+Criteria are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/html/rfc6902)). A criterion is an object that consists of an `op` property which specifies which operation to use; a `path` property which can be either a [json-pointer](https://tools.ietf.org/html/rfc6901) or (preferred) an array of path parts; and a `value` property which is used by the operation. The following operations are currently supported:
 
 **exists** ensures that the clue contains a property at the given `path`; `value` should be set to null
 
@@ -41,10 +41,10 @@ All library methods return a promise object that resolves to the noted types.
 var jennings = require('js');
 
 // insert a new answer and auto-generate ID (resolves to the new answer)
-jennings.create({conditions: [{op: 'eq', path: ['foo'], 'value': 'bar'}], data: {cool: 'beans'}});
+jennings.create({criteria: [{op: 'eq', path: ['foo'], 'value': 'bar'}], data: {cool: 'beans'}});
 
 // replace/insert an answer by ID (resolves to the new answer)
-jennings.save('one', {id: 'one', conditions: [{op: 'eq', path: ['foo'], 'value': 'bar'}], data: {cool: 'beans'}});
+jennings.save('one', {id: 'one', criteria: [{op: 'eq', path: ['foo'], 'value': 'bar'}], data: {cool: 'beans'}});
 
 // get an answer by ID (resolves to the requested answer or null)
 jennings.get('one');
@@ -58,7 +58,7 @@ jennings.query();
 // query for answers by clue (resolves to an array of answers)
 jennings.query({foo: 'bar'});
 
-// query for by conditions (resolves to an array of answers)
+// query for by criteria (resolves to an array of answers)
 jennings.query(null, [{op: 'eq', path: ['id'], value: 'one'}]);
 
 ```
