@@ -26,7 +26,7 @@ else {
 
 	// handle transactional errors
 	app.use(function(err, req, res, next) {
-		res.status(400).send({message: err.message});
+		res.status(err.name === 'NotFoundError' ? 404 : 400).send({message: err.message});
 	});
 
 	// start listening
