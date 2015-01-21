@@ -3,8 +3,8 @@
 module.exports = {
 	core: {
 		rethinkdb: {
-			db: process.env.WERCKER_RETHINKDB_HOST || 'jennings',
-			host: '127.0.0.1'
+			db: 'jennings',
+			host: process.env.WERCKER_RETHINKDB_HOST || '127.0.0.1'
 		},
 		pool: {
 			log: false,
