@@ -30,6 +30,9 @@ Conditions are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.or
 How To Use
 ----------
 
+Jennings is written for [nodejs](http://nodejs.org/) and uses [RethinkDB](rethinkdb.com) for persistance and synchronization. You'll need to make sure both are installed and that RethinkDB is running. You can obtain Jennings from npm: `npm install jennings --save`, and use it as a standalone service or embed it in your node project.
+
+
 **as a library**
 
 All library methods return a promise object that resolves to the noted types.
