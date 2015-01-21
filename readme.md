@@ -30,7 +30,14 @@ Criteria are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/
 
 **Example:**
 
-```json
+```js
+// Clue
+{
+	"category": "let's have a ball",
+	"question": "sink it and you've scratched"
+}
+
+// Answer - this answer would be returned in response to the above clue
 {
 	"id": "3dd771a1-c9d1-4c42-8057-e44ed788bf52",
 	"data": {
@@ -38,7 +45,7 @@ Criteria are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/
 	},
 	"criteria": [
 		{
-			"op": "equal",
+			"op": "eq",
 			"path": ["category"],
 			"value": "let's have a ball"
 		},
