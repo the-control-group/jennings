@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 // make a timestamped db
 var database = 'jennings_test_' + Date.now();
-var config = require('../config.json');
+var config = require('../config.test.js');
 var promise = null;
 var count = 0;
 
