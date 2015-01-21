@@ -26,6 +26,36 @@ Criteria are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/
 
 **gte** ensures that the contains a propert at the given `path`, and that its value is greater than or loosly equal to `value`
 
+----
+
+**Example:**
+
+```json
+{
+	"id": "3dd771a1-c9d1-4c42-8057-e44ed788bf52",
+	"data": {
+		"response": "cue ball"
+	},
+	"criteria": [
+		{
+			"op": "equal",
+			"path": ["category"],
+			"value": "let's have a ball"
+		},
+		{
+			"op": "match",
+			"path": ["question"],
+			"value": "scratched"
+		},
+		{
+			"op": "match",
+			"path": ["question"],
+			"value": "sink"
+		}
+	]
+}
+```
+
 
 How To Use
 ----------
