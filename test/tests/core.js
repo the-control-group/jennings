@@ -5,7 +5,7 @@ var config = require('../init.js');
 var core;
 
 describe('Core', function() {
-	var insertedId;
+	var createdId;
 
 	before(function(){
 		core = require('../../lib/core/index.js')(config.core);
@@ -36,7 +36,7 @@ describe('Core', function() {
 		};
 		core.create(data)
 		.then(function(answer){
-			insertedId = answer.id;
+			createdId = answer.id;
 			delete answer.id;
 			assert.deepEqual(answer, data);
 			done();
@@ -45,14 +45,14 @@ describe('Core', function() {
 	});
 
 	it('rejects an invalid save', function(done){
-		core.save(insertedId, {foo: 'bar'})
+		core.save(createdId, {foo: 'bar'})
 		.then(function(){ done(new Error('should not pass validation')); })
 		.catch(function(){ done(); });
 	});
 
 	it('accepts a valid save', function(done){
 		var data = {
-			id: insertedId,
+			id: createdId,
 			data: {},
 			criteria: [
 				{
@@ -80,9 +80,9 @@ describe('Core', function() {
 	});
 
 	it('accepts an existing get', function(done){
-		core.get(insertedId)
+		core.get(createdId)
 		.then(function(answer){
-			assert.equal(answer.id, insertedId);
+			assert.equal(answer.id, createdId);
 			done();
 		})
 		.catch(done);
@@ -127,9 +127,9 @@ describe('Core', function() {
 		.catch(done);
 	});
 	it('accepts an existing delete', function(done){
-		core.delete(insertedId)
+		core.delete(createdId)
 		.then(function(answer){
-			assert.equal(answer.id, insertedId);
+			assert.equal(answer.id, createdId);
 			done();
 		})
 		.catch(done);

@@ -21,12 +21,13 @@ else {
 	var config = require(process.env.CONFIG || './config.json');
 	var jennings = require('./lib/core/index.js')(config.core);
 
-	// handle connection errors
+	// handle arrdb errors
 	jennings.$arrdb.on('error', function(err){
 
 		// NOTE: this is where one would fire off an alert, kill this process, or
 		// remove this node from a load balancer. By default, we'll just use continue
 		// to use our local cache until we're able to reconnect.
+		console.error(err);
 
 		jennings.$arrdb.once('reconnect', function(){
 
@@ -38,11 +39,6 @@ else {
 
 	// add to the server
 	app.use(config.prefix, jennings.router);
-
-	// handle transactional errors
-	app.use(function(err, req, res, next) {
-		res.status(err.name === 'NotFoundError' ? 404 : 400).send({message: err.message});
-	});
 
 	// start listening
 	app.listen(config.port);
