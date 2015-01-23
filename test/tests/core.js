@@ -70,6 +70,25 @@ describe('Core', function() {
 		.catch(done);
 	});
 
+	it('applies defaults on save', function(done){
+		var data = {
+			id: createdId,
+			criteria: [
+				{
+					op: 'equal',
+					path: ['foo'],
+					value: 'baz'
+				}
+			]
+		};
+		core.save(data.id, data)
+		.then(function(answer){
+			assert.deepEqual(answer.data, {});
+			done();
+		})
+		.catch(done);
+	});
+
 	it('returns null for a nonexistant get', function(done){
 		core.get('foo')
 		.then(function(answer){
