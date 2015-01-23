@@ -13,8 +13,8 @@
     "test": "mocha test/tests/*"
   },
   "dependencies": {
-    "body-parser": "^1.10.1",
-    "express": "^4.10.7",
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
     "generic-pool": "^2.1.1",
     "jjv": "^1.0.2",
     "q": "^1.1.2",
