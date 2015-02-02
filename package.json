@@ -13,12 +13,12 @@
     "test": "mocha test/tests/*"
   },
   "dependencies": {
-    "body-parser": "^1.10.2",
-    "express": "^4.11.1",
+    "body-parser": "^1.11.0",
+    "express": "^4.11.2",
     "generic-pool": "^2.1.1",
     "jjv": "^1.0.2",
     "q": "^1.1.2",
-    "rethinkdb": "^1.15.0"
+    "rethinkdb": "^1.16.0"
   },
   "engines": {
     "node": ">=0.10"
