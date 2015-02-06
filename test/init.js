@@ -1,6 +1,5 @@
 'use strict';
 
-var Q = require('q');
 var r = require('rethinkdb');
 var _ = require('lodash');
 
@@ -32,7 +31,7 @@ before(function(done){
 		.then(function(){ return r.db(database).tableCreate(config.core.table).run(conn); })
 
 		// load fixtures
-		.then(function(){ return r.db(database).table(config.core.table).insert(require('./fixtures.json')).run(conn); })
+		.then(function(){ return r.db(database).table(config.core.table).insert(require('./fixtures.json')).run(conn); });
 	});
 
 	return promise.then(function(){ return done(); });

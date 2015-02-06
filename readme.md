@@ -14,17 +14,19 @@ Criteria are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/
 
 **exists** ensures that the clue contains a property at the given `path`; `value` should be set to null
 
-**equal, eq** ensures that the contains a propert at the given `path`, and that its value is strictly equal to `value`
+**match** ensures that the clue contains a property at the given `path`, and that its value is matched by the regular expression supplied in `value`
 
-**match** ensures that the contains a propert at the given `path`, and that its value is matched by the regular expression supplied in `value`
+**eq** ensures that the clue contains a property at the given `path`, and that its value is strictly equal to `value`
 
-**lt** ensures that the contains a propert at the given `path`, and that its value is less than `value`
+**ne** ensures that the clue lacks a property at the given `path`, or that its value is not strictly equal to `value`
 
-**lte** ensures that the contains a propert at the given `path`, and that its value is less than or loosly equal to `value`
+**lt** ensures that the clue contains a property at the given `path`, and that its value is less than `value`
 
-**gt** ensures that the contains a propert at the given `path`, and that its value is greater than `value`
+**lte** ensures that the clue contains a property at the given `path`, and that its value is less than or loosly equal to `value`
 
-**gte** ensures that the contains a propert at the given `path`, and that its value is greater than or loosly equal to `value`
+**gt** ensures that the clue contains a property at the given `path`, and that its value is greater than `value`
+
+**gte** ensures that the clue contains a property at the given `path`, and that its value is greater than or loosly equal to `value`
 
 ----
 
@@ -37,7 +39,7 @@ Criteria are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/
 	"question": "sink it and you've scratched"
 }
 
-// Answer - this answer would be returned in response to the above clue
+// Answer - this is one answer that might be returned in response to the above clue
 {
 	"id": "3dd771a1-c9d1-4c42-8057-e44ed788bf52",
 	"data": {

@@ -96,7 +96,7 @@ describe('ArrDB', function() {
 				data: {},
 				criteria: [
 					{
-						op: 'equal',
+						op: 'eq',
 						path: ['foo'],
 						value: 'bar'
 					}
@@ -124,7 +124,7 @@ describe('ArrDB', function() {
 				data: {},
 				criteria: [
 					{
-						op: 'equal',
+						op: 'eq',
 						path: ['foo'],
 						value: 'baz'
 					}

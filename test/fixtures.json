@@ -5,7 +5,7 @@
 	},
 	"criteria": [
 		{
-			"op": "equal",
+			"op": "eq",
 			"path": ["category"],
 			"value": "let's have a ball"
 		},
@@ -28,7 +28,7 @@
 	},
 	"criteria": [
 		{
-			"op": "equal",
+			"op": "eq",
 			"path": ["category"],
 			"value": "let's have a ball"
 		},

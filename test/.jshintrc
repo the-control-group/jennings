@@ -1,0 +1,10 @@
+{
+	"node": true,
+	"unused": "vars",
+	"globals": {
+		"before": true,
+		"after": true,
+		"describe": true,
+		"it": true
+	}
+}

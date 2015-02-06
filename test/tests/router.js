@@ -7,29 +7,29 @@ var core, request;
 var data = {
 	criteria: [
 		{
-			op: "equal",
+			op: 'eq',
 			path: [
-				"category"
+				'category'
 			],
-			value: "let's have a ball"
+			value: 'let\'s have a ball'
 		},
 		{
-			op: "match",
+			op: 'match',
 			path: [
-				"question"
+				'question'
 			],
-			value: "scratched"
+			value: 'scratched'
 		},
 		{
-			op: "match",
+			op: 'match',
 			path: [
-				"question"
+				'question'
 			],
-			value: "sink"
+			value: 'sink'
 		}
 	],
 	data: {
-		response: "cue ball"
+		response: 'cue ball'
 	}
 };
 

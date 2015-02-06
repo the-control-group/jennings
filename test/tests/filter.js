@@ -34,45 +34,89 @@ describe('Filter', function() {
 		});
 	});
 
-	describe('equal', function(){
+	describe('eq', function(){
 		it('accepts strict equal', function(){
 			assert.isTrue(filter(
-				[{op: 'equal', path: ['foo'], value: 'bar'}],
+				[{op: 'eq', path: ['foo'], value: 'bar'}],
 				{foo: 'bar'}
 			));
 		});
 
 		it('accepts deep equal', function(){
 			assert.isTrue(filter(
-				[{op: 'equal', path: ['foo','bar'], value: true}],
+				[{op: 'eq', path: ['foo','bar'], value: true}],
 				{foo: {bar: true}}
 			));
 		});
 
 		it('rejects failed equal', function(){
 			assert.isFalse(filter(
-				[{op: 'equal', path: ['foo'], value: 1}],
+				[{op: 'eq', path: ['foo'], value: 1}],
 				{foo: 'asdf'}
 			));
 		});
 
 		it('rejects loose equal', function(){
 			assert.isFalse(filter(
-				[{op: 'equal', path: ['foo'], value: 1}],
+				[{op: 'eq', path: ['foo'], value: 1}],
 				{foo: true}
 			));
 		});
 
 		it('rejects nonexistant path', function(){
 			assert.isFalse(filter(
-				[{op: 'equal', path: ['foo'], value: true}],
+				[{op: 'eq', path: ['foo'], value: true}],
 				{}
 			));
 		});
 
 		it('rejects nonexistant deep path', function(){
 			assert.isFalse(filter(
-				[{op: 'equal', path: ['foo','bar'], value: 'baz'}],
+				[{op: 'eq', path: ['foo','bar'], value: 'baz'}],
+				{foo: 'bar'}
+			));
+		});
+	});
+
+	describe('ne', function(){
+		it('rejects strict equal', function(){
+			assert.isFalse(filter(
+				[{op: 'ne', path: ['foo'], value: 'bar'}],
+				{foo: 'bar'}
+			));
+		});
+
+		it('rejects deep equal', function(){
+			assert.isFalse(filter(
+				[{op: 'ne', path: ['foo','bar'], value: true}],
+				{foo: {bar: true}}
+			));
+		});
+
+		it('accepts failed equal', function(){
+			assert.isTrue(filter(
+				[{op: 'ne', path: ['foo'], value: 1}],
+				{foo: 'asdf'}
+			));
+		});
+
+		it('accepts loose equal', function(){
+			assert.isTrue(filter(
+				[{op: 'ne', path: ['foo'], value: 1}],
+				{foo: true}
+			));
+		});
+
+		it('accepts nonexistant path', function(){
+			assert.isTrue(filter(
+				[{op: 'ne', path: ['foo'], value: true}],
+				{}
+			));
+		});
+
+		it('accepts nonexistant deep path', function(){
+			assert.isTrue(filter(
+				[{op: 'ne', path: ['foo','bar'], value: 'baz'}],
 				{foo: 'bar'}
 			));
 		});
@@ -219,8 +263,8 @@ describe('Filter', function() {
 		it('accepts strict equal', function(){
 			assert.isTrue(filter(
 				[
-					{op: 'equal', path: ['foo'], value: 'bar'},
-					{op: 'equal', path: ['baz'], value: 'bah'}
+					{op: 'eq', path: ['foo'], value: 'bar'},
+					{op: 'eq', path: ['baz'], value: 'bah'}
 				],
 				{foo: 'bar', baz: 'bah'}
 			));
@@ -229,13 +273,13 @@ describe('Filter', function() {
 		it('rejects if either is false', function(){
 			assert.isFalse(filter(
 				[
-					{op: 'equal', path: ['foo'], value: 'bar'},
-					{op: 'equal', path: ['baz'], value: false}
+					{op: 'eq', path: ['foo'], value: 'bar'},
+					{op: 'eq', path: ['baz'], value: false}
 				],
 				{foo: 'bar', baz: 'bah'}
 			));
 		});
 
-	})
+	});
 
 });
