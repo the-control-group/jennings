@@ -2,7 +2,7 @@
 
 var assert = require('chai').assert;
 var config = require('../init.js');
-var core, request;
+var jennings, request;
 
 var data = {
 	criteria: [
@@ -38,13 +38,13 @@ describe('Router', function() {
 
 	before(function(){
 		var app = require('express')();
-		core = require('../../lib/core/index.js')(config.core);
-		app.use(core.router).use(function(err, req, res, next){});
+		jennings = require('../../lib/index.js')(config);
+		app.use(jennings.router).use(function(err, req, res, next){});
 		request = require('supertest')(app);
 	});
 
 	after(function(done){
-		core.$arrdb.stop()
+		jennings.$core.arrdb.stop()
 		.then(function(){ done(); })
 		.catch(done);
 	});

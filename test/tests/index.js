@@ -2,28 +2,26 @@
 
 var assert = require('chai').assert;
 var config = require('../init.js');
-var core;
+var jennings;
 
-describe('Core', function() {
+describe('Jennings', function() {
 	var createdId;
 
 	before(function(){
-		core = require('../../lib/core/index.js')(config.core);
+		jennings = require('../../lib/index.js')(config);
 	});
 
-	after(function(done){
-		core.$arrdb.stop()
-		.then(function(){ done(); })
-		.catch(done);
+	after(function(){
+		return jennings.$core.arrdb.stop();
 	});
 
 	it('rejects an invalid create', function(done){
-		core.create({foo: 'bar'})
+		jennings.create({foo: 'bar'})
 		.then(function(){ done(new Error('should not pass validation')); })
 		.catch(function(){ done(); });
 	});
 
-	it('accepts a valid create', function(done){
+	it('accepts a valid create', function(){
 		var data = {
 			data: {},
 			criteria: [
@@ -34,23 +32,22 @@ describe('Core', function() {
 				}
 			]
 		};
-		core.create(data)
+
+		return jennings.create(data)
 		.then(function(answer){
 			createdId = answer.id;
 			delete answer.id;
 			assert.deepEqual(answer, data);
-			done();
-		})
-		.catch(done);
+		});
 	});
 
 	it('rejects an invalid save', function(done){
-		core.save(createdId, {foo: 'bar'})
+		jennings.save(createdId, {foo: 'bar'})
 		.then(function(){ done(new Error('should not pass validation')); })
 		.catch(function(){ done(); });
 	});
 
-	it('accepts a valid save', function(done){
+	it('accepts a valid save', function(){
 		var data = {
 			id: createdId,
 			data: {},
@@ -62,15 +59,14 @@ describe('Core', function() {
 				}
 			]
 		};
-		core.save(data.id, data)
+
+		return jennings.save(data.id, data)
 		.then(function(answer){
 			assert.deepEqual(answer, data);
-			done();
-		})
-		.catch(done);
+		});
 	});
 
-	it('applies defaults on save', function(done){
+	it('applies defaults on save', function(){
 		var data = {
 			id: createdId,
 			criteria: [
@@ -81,46 +77,40 @@ describe('Core', function() {
 				}
 			]
 		};
-		core.save(data.id, data)
+		
+		return jennings.save(data.id, data)
 		.then(function(answer){
 			assert.deepEqual(answer.data, {});
-			done();
-		})
-		.catch(done);
+		});
 	});
 
-	it('returns null for a nonexistant get', function(done){
-		core.get('foo')
+	it('returns null for a nonexistant get', function(){
+		return jennings.get('foo')
 		.then(function(answer){
 			assert.isNull(answer);
-			done();
-		})
-		.catch(done);
+		});
 	});
 
-	it('accepts an existing get', function(done){
-		core.get(createdId)
+	it('accepts an existing get', function(){
+		return jennings.get(createdId)
 		.then(function(answer){
 			assert.equal(answer.id, createdId);
-			done();
-		})
-		.catch(done);
+		});
 	});
 
-	it('responds to a query with conditions', function(done){
+	it('responds to a query with conditions', function(){
 		var conditions = [{
 			path: ['id'],
 			op: 'eq',
 			value: 'one'
 		}];
-		core.query(null, conditions).then(function(answers){
+		return jennings.query(null, conditions).then(function(answers){
 			assert.lengthOf(answers, 1);
 			assert.equal(answers[0].id, 'one');
-			done();
 		});
 	});
 
-	it('responds to a query with a clue', function(done){
+	it('responds to a query with a clue', function(){
 		var clue = {
 			category: 'let\'s have a ball',
 			question: 'sink it and you\'ve scratched'
@@ -130,28 +120,24 @@ describe('Core', function() {
 		// 	question: 'america\'s second-largest daily newspaper, it\'s published in new york city & 4 regional editions',
 		// 	editions: 4
 		// }
-		core.query(clue).then(function(answers){
+		return jennings.query(clue).then(function(answers){
 			assert.lengthOf(answers, 1);
 			assert.equal(answers[0].id, 'one');
-			done();
 		});
 	});
 
-	it('returns null for a nonexistant delete', function(done){
-		core.delete('foo')
+	it('returns null for a nonexistant delete', function(){
+		return jennings.delete('foo')
 		.then(function(answer){
 			assert.isNull(answer);
-			done();
-		})
-		.catch(done);
+		});
 	});
-	it('accepts an existing delete', function(done){
-		core.delete(createdId)
+	
+	it('accepts an existing delete', function(){
+		return jennings.delete(createdId)
 		.then(function(answer){
 			assert.equal(answer.id, createdId);
-			done();
-		})
-		.catch(done);
+		});
 	});
 	
 });

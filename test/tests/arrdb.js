@@ -8,10 +8,8 @@ var arrdb = require('../../lib/core/arrdb.js')(config.core);
 
 
 describe('ArrDB', function() {
-	after(function(done){
-		arrdb.stop()
-		.then(function(){ done(); })
-		.catch(done);
+	after(function(){
+		return arrdb.stop()
 	});
 
 	it('is not active', function(){
@@ -45,10 +43,8 @@ describe('ArrDB', function() {
 	});
 
 	describe('restart', function(){
-		before(function(done){
-			arrdb.start()
-			.then(function(){ done(); })
-			.catch(done);
+		before(function(){
+			return arrdb.start();
 		});
 
 		it('emits stop and start', function(done){
@@ -63,12 +59,8 @@ describe('ArrDB', function() {
 	});
 
 	describe('auto reconnect', function(){
-		before(function(done){
-			arrdb.start()
-			.then(function(){
-				done();
-			})
-			.catch(done);
+		before(function(){
+			return arrdb.start();
 		});
 
 		it('emits an "error" on connection failure', function(done){
@@ -84,10 +76,8 @@ describe('ArrDB', function() {
 	});
 
 	describe('sync operations', function(){
-		before(function(done){
-			arrdb.start()
-			.then(function(){ done(); })
-			.catch(done);
+		before(function(){
+			return arrdb.start();
 		});
 
 		it('syncs an insert operation', function(done){

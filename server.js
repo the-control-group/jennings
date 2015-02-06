@@ -1,6 +1,10 @@
 'use strict';
 
 var cluster = require('cluster');
+var configPath = process.argv.length > 2 ?
+	(['/','.'].indexOf(process.argv[2][0]) === -1 ? './' + process.argv[2] : process.argv[2])
+	: './config.default.json';
+
 
 // the master
 if (cluster.isMaster) {
@@ -18,8 +22,8 @@ if (cluster.isMaster) {
 // the child processes
 else {
 	var app = require('express')();
-	var config = require(process.env.CONFIG || './config.json');
-	var jennings = require('./lib/core/index.js')(config.core);
+	var config = require(configPath);
+	var jennings = require('./lib/core/index.js')(config);
 
 	// handle arrdb errors
 	jennings.$arrdb.on('error', function(err){
