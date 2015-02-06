@@ -2,7 +2,7 @@
   "name": "jennings",
   "description": "Jennings",
   "author": "Mike Marcacci <mike.marcacci@thecontrolgroup.com>",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "./lib/core/index.js",
   "repository": {
     "type": "git",
