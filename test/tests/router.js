@@ -64,14 +64,13 @@ describe('Router', function() {
 			.post('/')
 			.send(data)
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.id);
 				createdId = res.body.id;
 				delete res.body.id;
 				assert.deepEqual(res.body, data);
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	it('rejects an invalid PUT', function(done){
@@ -90,13 +89,12 @@ describe('Router', function() {
 			.put('/' + createdId)
 			.send(data)
 			.expect(200)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.equal(res.body.id, createdId);
 				delete res.body.id;
 				assert.deepEqual(res.body, data);
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	it('responds 404 to a nonexistant GET', function(done){
@@ -112,13 +110,12 @@ describe('Router', function() {
 			.get('/' + createdId)
 			.send()
 			.expect(200)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.equal(res.body.id, createdId);
 				delete res.body.id;
 				assert.deepEqual(res.body, data);
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	it('responds to a GET query with criteria', function(done){
@@ -127,12 +124,11 @@ describe('Router', function() {
 			.query({criteria: '[{"op":"eq","path":["id"],"value":"'+createdId+'"}]'})
 			.send()
 			.expect(200)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isArray(res.body);
 				assert.lengthOf(res.body, 1);
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	it('responds to a GET query with a clue', function(done){
@@ -141,12 +137,11 @@ describe('Router', function() {
 			.query({clue: '{"category": "let\'s have a ball", "question": "sink it and you\\\"ve scratched"}'})
 			.send()
 			.expect(200)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isArray(res.body);
 				assert.lengthOf(res.body, 2);
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	it('responds 404 to a nonexistant DELETE', function(done){
@@ -162,13 +157,12 @@ describe('Router', function() {
 			.delete('/' + createdId)
 			.send()
 			.expect(200)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.equal(res.body.id, createdId);
 				delete res.body.id;
 				assert.deepEqual(res.body, data);
-				done();
-			});
+			})
+			.end(done);
 	});
 	
 });
