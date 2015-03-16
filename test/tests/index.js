@@ -98,13 +98,25 @@ describe('Jennings', function() {
 		});
 	});
 
+	it('responds to a query for all answers', function(){
+		return jennings.query(null, null, false).then(function(answers){
+			assert.lengthOf(answers, 3);
+		});
+	});
+
+	it('responds to a strongly consistent query for all answers', function(){
+		return jennings.query(null, null, true).then(function(answers){
+			assert.lengthOf(answers, 3);
+		});
+	});
+
 	it('responds to a query with conditions', function(){
 		var conditions = [{
 			path: ['id'],
 			op: 'eq',
 			value: 'one'
 		}];
-		return jennings.query(null, conditions).then(function(answers){
+		return jennings.query(null, conditions, false).then(function(answers){
 			assert.lengthOf(answers, 1);
 			assert.equal(answers[0].id, 'one');
 		});
@@ -120,7 +132,7 @@ describe('Jennings', function() {
 		// 	question: 'america\'s second-largest daily newspaper, it\'s published in new york city & 4 regional editions',
 		// 	editions: 4
 		// }
-		return jennings.query(clue).then(function(answers){
+		return jennings.query(clue, null, false).then(function(answers){
 			assert.lengthOf(answers, 1);
 			assert.equal(answers[0].id, 'one');
 		});

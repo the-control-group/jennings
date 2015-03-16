@@ -118,6 +118,31 @@ describe('Router', function() {
 			.end(done);
 	});
 
+	it('responds to a GET query for all answers', function(done){
+		request
+			.get('/')
+			.send()
+			.expect(200)
+			.expect(function(res){
+				assert.isArray(res.body);
+				assert.lengthOf(res.body, 3);
+			})
+			.end(done);
+	});
+
+	it('responds to a GET strongly consistent query for all answers', function(done){
+		request
+			.get('/')
+			.query({strong: 'true'})
+			.send()
+			.expect(200)
+			.expect(function(res){
+				assert.isArray(res.body);
+				assert.lengthOf(res.body, 3);
+			})
+			.end(done);
+	});
+
 	it('responds to a GET query with criteria', function(done){
 		request
 			.get('/')
