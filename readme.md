@@ -94,6 +94,9 @@ jennings.delete('one');
 // get all answers (resolves to an array of answers)
 jennings.query();
 
+// get all answers with strong consistency (resolves to an array of answers)
+jennings.query(null, null, true);
+
 // query for answers by clue (resolves to an array of answers)
 jennings.query({foo: 'bar'});
 
