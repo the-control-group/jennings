@@ -145,24 +145,24 @@ describe('Filter', function() {
 		});
 	});
 
-	describe('lte', function(){
+	describe('le', function(){
 		it('returns false when greater', function(){
 			assert.isFalse(filter(
-				[{op: 'lte', path: ['foo'], value: 4}],
+				[{op: 'le', path: ['foo'], value: 4}],
 				{foo: 5}
 			));
 		});
 
 		it('returns true when equal', function(){
 			assert.isTrue(filter(
-				[{op: 'lte', path: ['foo'], value: 5}],
+				[{op: 'le', path: ['foo'], value: 5}],
 				{foo: 5}
 			));
 		});
 
 		it('returns true when less', function(){
 			assert.isTrue(filter(
-				[{op: 'lte', path: ['foo'], value: 6}],
+				[{op: 'le', path: ['foo'], value: 6}],
 				{foo: 5}
 			));
 		});
@@ -192,24 +192,24 @@ describe('Filter', function() {
 		});
 	});
 
-	describe('gte', function(){
+	describe('ge', function(){
 		it('returns true when greater', function(){
 			assert.isTrue(filter(
-				[{op: 'gte', path: ['foo'], value: 4}],
+				[{op: 'ge', path: ['foo'], value: 4}],
 				{foo: 5}
 			));
 		});
 
 		it('returns true when equal', function(){
 			assert.isTrue(filter(
-				[{op: 'gte', path: ['foo'], value: 5}],
+				[{op: 'ge', path: ['foo'], value: 5}],
 				{foo: 5}
 			));
 		});
 
 		it('returns false when less', function(){
 			assert.isFalse(filter(
-				[{op: 'gte', path: ['foo'], value: 6}],
+				[{op: 'ge', path: ['foo'], value: 6}],
 				{foo: 5}
 			));
 		});

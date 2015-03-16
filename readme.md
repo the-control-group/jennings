@@ -22,11 +22,11 @@ Criteria are inspired by the JSON Patch spec ([RFC 6902](https://tools.ietf.org/
 
 **lt** ensures that the clue contains a property at the given `path`, and that its value is less than `value`
 
-**lte** ensures that the clue contains a property at the given `path`, and that its value is less than or loosly equal to `value`
+**le** ensures that the clue contains a property at the given `path`, and that its value is less than or loosly equal to `value`
 
 **gt** ensures that the clue contains a property at the given `path`, and that its value is greater than `value`
 
-**gte** ensures that the clue contains a property at the given `path`, and that its value is greater than or loosly equal to `value`
+**ge** ensures that the clue contains a property at the given `path`, and that its value is greater than or loosly equal to `value`
 
 ----
 
